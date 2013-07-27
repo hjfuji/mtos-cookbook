@@ -1,8 +1,13 @@
 {
-  "run_list":[
+  "run_list": [
     "base",
     "yum::epel",
     "perl",
-    "base::cpan"
-  ]
+    "base::cpan",
+    "base::supervisord"
+  ],
+  "user": "vagrant",
+  "mysql": {
+    "server_root_password": "nelson"
+  }
 }
