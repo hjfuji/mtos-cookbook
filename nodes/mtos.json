@@ -5,12 +5,18 @@
     "yum::epel",
     "perl",
     "base::cpan",
-    "base::supervisord"
+    "base::supervisord",
+    "base::mt"
   ],
   "user": "vagrant",
   "mysql": {
     "server_root_password": "nelson",
     "server_debian_password": "nelson",
-    "server_repl_password": "nelson"
+    "server_repl_password": "nelson",
+  },
+  "mt": {
+    "dbuser": "melody",
+    "dbpass": "nelson",
+    "database": "mt"
   }
 }
