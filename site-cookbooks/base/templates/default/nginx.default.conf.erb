@@ -1,0 +1,33 @@
+upstream apache {
+    server 127.0.0.1:8080;
+}
+
+upstream mt {
+    server 127.0.0.1:5000;
+}
+
+server {
+    listen 80;
+    server_name localhost;
+    client_max_body_size 32M;
+
+    proxy_set_header        X-Real-IP       $remote_addr;
+    proxy_set_header        X-Forwarded-For $remote_addr;
+    proxy_set_header        Host            $http_host;
+    proxy_redirect          off;
+
+    location ~ ^/mt/.*\.cgi {
+        proxy_connect_timeout   90;
+        proxy_send_timeout      90;
+        proxy_read_timeout      90;
+        proxy_pass http://mt;
+    }
+
+    location / {
+        proxy_connect_timeout   90;
+        proxy_send_timeout      90;
+        proxy_read_timeout      90;
+        proxy_pass http://apache;
+        break;
+    }
+}

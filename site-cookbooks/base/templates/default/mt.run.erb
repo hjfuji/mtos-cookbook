@@ -1,0 +1,4 @@
+#!/bin/sh
+CURDIR=`dirname $0`
+cd $CURDIR
+/usr/local/bin/starman -p 5000 --pid /var/www/html/mt/pids/mt.pid /var/www/html/mt/mt.psgi

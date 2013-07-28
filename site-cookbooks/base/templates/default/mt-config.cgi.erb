@@ -1,0 +1,19 @@
+##          Movable Type configuration file                   ##
+
+# The CGIPath is the URL to your Movable Type directory
+CGIPath    /mt/
+
+# The StaticWebPath is the URL to your mt-static directory
+StaticWebPath    /mt/mt-static
+
+#================ DATABASE SETTINGS ==================
+ObjectDriver DBI::mysql
+Database   <%= node['mt']['database'] %>
+DBUser     <%= node['mt']['dbuser'] %>
+DBPassword <%= node['mt']['dbpass'] %>
+DBHost     <%= node['mt']['dbhost'] %>
+
+## Change setting to language that you want to using.
+DefaultLanguage ja
+PIDFilePath /var/www/html/mt/pids/mt.pid
+MemcachedServers 127.0.0.1:11211

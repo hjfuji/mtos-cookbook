@@ -20,8 +20,8 @@ execute "yum-update" do
 end
 
 %w{
-  httpd mysql mysql-server php php-mbstring nginx git gcc make
-  zlib-devel gd-devel libxml2-devel expat expat-devel
+  httpd mysql mysql-server php php-mbstring php-mysql nginx git gcc make
+  zlib-devel gd-devel libxml2-devel expat expat-devel mcrypt php-mcrypt
   memcached memcached-devel ImageMagick ImageMagick-perl
 }.each do |pkg|
   package pkg do
@@ -29,7 +29,7 @@ end
   end
 end
 
-service "httpd" do
+service "nginx" do
   supports :status => true, :restart => true, :reload => true
   action [ :enable, :start ]
 end
@@ -43,7 +43,7 @@ template "httpd.conf" do
   notifies :reload, 'service[httpd]'
 end
 
-service "nginx" do
+service "httpd" do
   supports :status => true, :restart => true, :reload => true
   action [ :enable, :start ]
 end

@@ -1,12 +1,15 @@
 {
   "run_list": [
-    "base",
-    "mysql::server",
     "yum::epel",
+    "base",
+    "iptables",
+    "mysql::server",
     "perl",
     "base::cpan",
     "base::supervisord",
-    "base::mtos"
+    "base::mtos",
+    "base::php_setting",
+    "base::phpmyadmin"
   ],
   "user": "vagrant",
   "mysql": {
