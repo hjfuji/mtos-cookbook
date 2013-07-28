@@ -6,15 +6,16 @@
     "perl",
     "base::cpan",
     "base::supervisord",
-    "base::mt"
+    "base::mtos"
   ],
   "user": "vagrant",
   "mysql": {
     "server_root_password": "nelson",
     "server_debian_password": "nelson",
-    "server_repl_password": "nelson",
+    "server_repl_password": "nelson"
   },
   "mt": {
+    "dbhost": "localhost",
     "dbuser": "melody",
     "dbpass": "nelson",
     "database": "mt"

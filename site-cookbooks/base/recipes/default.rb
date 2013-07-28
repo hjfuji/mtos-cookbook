@@ -22,7 +22,7 @@ end
 %w{
   httpd mysql mysql-server php php-mbstring nginx git gcc make
   zlib-devel gd-devel libxml2-devel expat expat-devel
-  ImageMagick ImageMagick-perl
+  memcached memcached-devel ImageMagick ImageMagick-perl
 }.each do |pkg|
   package pkg do
     action :install
@@ -43,17 +43,17 @@ template "httpd.conf" do
   notifies :reload, 'service[httpd]'
 end
 
+service "nginx" do
+  supports :status => true, :restart => true, :reload => true
+  action [ :enable, :start ]
+end
+
 service "mysqld" do
   supports :status => true, :restart => true
   action [ :enable, :start ]
 end
 
-template "my.conf" do
-  path "/etc/my.cnf"
-  source "my.cnf.erb"
-  owner "root"
-  group "root"
-  mode 0644
-  notifies :restart, 'service[mysqld]'
+service "memcached" do
+  supports :status => true, :restart => true, :reload => true
+  action [ :enable, :start ]
 end
-
