@@ -2,7 +2,7 @@
   "run_list": [
     "yum::epel",
     "base",
-    "iptables",
+    "base::iptables",
     "mysql::server",
     "perl",
     "base::cpan",

@@ -57,3 +57,19 @@ service "memcached" do
   supports :status => true, :restart => true, :reload => true
   action [ :enable, :start ]
 end
+
+cookbook_file "/etc/sysconfig/clock" do
+  owner "root"
+  group "root"
+  mode 00644
+  not_if { File.exists?("/etc/sysconfig/clock") }
+end
+
+bash "set timezone" do
+  user "root"
+  group "root"
+  code <<-EOC
+    cp -p /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+    source /etc/sysconfig/clock
+  EOC
+end
