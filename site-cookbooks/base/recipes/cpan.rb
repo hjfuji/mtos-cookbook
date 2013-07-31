@@ -8,7 +8,9 @@
   cpan_module pkg
 end
 
-%w{Net::Server DIME::Tools}.each do |pkg|
+cpan_module "http://search.cpan.org/CPAN/authors/id/M/ML/MLEHMANN/common-sense-3.6.tar.gz"
+
+%w{Net::Server DIME::Tools SOAP::Lite}.each do |pkg|
   cpan_module pkg do
     force true
   end
@@ -16,7 +18,7 @@ end
 
 %w{
   Task::Plack CGI::Parse::PSGI CGI::Compile
-  SOAP::Lite XMLRPC::Transport::HTTP::Plack Starman
+  XMLRPC::Transport::HTTP::Plack Starman
 }.each do |pkg|
   cpan_module pkg
 end

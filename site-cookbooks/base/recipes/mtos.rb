@@ -87,3 +87,10 @@ service "supervisord" do
   supports :status => true, :restart => true, :reload => true
   action [ :enable, :start ]
 end
+
+cron "mt" do
+  minute "*/5"
+  user "vagrant"
+  command "cd /var/www/html/mt; ./tools/run-periodic-tasks"
+  action :create
+end
