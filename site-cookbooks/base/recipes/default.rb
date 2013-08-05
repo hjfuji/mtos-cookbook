@@ -7,7 +7,7 @@
 # All rights reserved - Do Not Redistribute
 #
 
-%w{yum-fastestmirror nano wget}.each do |pkg|
+%w{yum-fastestmirror nano wget zip unzip}.each do |pkg|
   package pkg do
     action :install
   end
