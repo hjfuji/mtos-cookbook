@@ -90,7 +90,7 @@ end
 
 cron "mt" do
   minute "*/5"
-  user "vagrant"
+  user node['user']
   command "cd /var/www/html/mt; ./tools/run-periodic-tasks"
   action :create
 end

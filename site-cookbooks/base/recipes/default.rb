@@ -19,10 +19,22 @@ execute "yum-update" do
   action :run
 end
 
+group node['user'] do
+  group_name node['user']
+  action :create
+end
+
+user node['user'] do
+  group node['user']
+  password nil
+  supports :manage_home => true
+  action [ :create, :manage ]
+end
+
 %w{
   httpd mysql mysql-server php php-mbstring php-mysql nginx git gcc make
   zlib-devel gd-devel libxml2-devel expat expat-devel mcrypt php-mcrypt
-  memcached memcached-devel ImageMagick ImageMagick-perl
+  memcached memcached-devel ImageMagick ImageMagick-perl zip unzip
 }.each do |pkg|
   package pkg do
     action :install
@@ -63,6 +75,20 @@ cookbook_file "/etc/sysconfig/clock" do
   group "root"
   mode 00644
   not_if { File.exists?("/etc/sysconfig/clock") }
+end
+
+cookbook_file "/etc/selinux/config" do
+  owner "root"
+  group "root"
+  mode 00644
+end
+
+bash "disable selinux" do
+  user "root"
+  group "root"
+  code <<-EOC
+    setenforce 0
+  EOC
 end
 
 bash "set timezone" do
