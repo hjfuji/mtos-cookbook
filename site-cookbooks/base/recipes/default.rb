@@ -32,12 +32,30 @@ user node['user'] do
 end
 
 %w{
-  httpd mysql mysql-server php php-mbstring php-mysql nginx git gcc make
-  zlib-devel gd-devel libxml2-devel expat expat-devel mcrypt php-mcrypt
+  mysql mysql-devel mysql-server mysql-client
+}.each do |pkg|
+  yum_package pkg do
+    options "--enablerepo=remi"
+    action [ :install, :upgrade ]
+  end
+end
+
+%w{
+  httpd nginx git gcc make
+  zlib-devel gd-devel libxml2-devel expat expat-deve mcrypt
   memcached memcached-devel ImageMagick ImageMagick-perl zip unzip
 }.each do |pkg|
   package pkg do
     action :install
+  end
+end
+
+%w{
+  php php-mbstring php-mysql php-mcrypt php-pecl-xdebug
+}.each do |pkg|
+  yum_package pkg do
+    options "--enablerepo=remi"
+    action [ :install, :upgrade ]
   end
 end
 

@@ -1,6 +1,7 @@
 {
   "run_list": [
     "yum::epel",
+    "base::remi",
     "base",
     "base::iptables",
     "mysql::server",
