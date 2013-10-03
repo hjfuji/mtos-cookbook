@@ -105,7 +105,10 @@ bash "disable selinux" do
   user "root"
   group "root"
   code <<-EOC
-    setenforce 0
+    ENF=`getenforce`
+    if [ $ENF != "Disabled" ]; then
+      setenforce 0
+    fi
   EOC
 end
 
