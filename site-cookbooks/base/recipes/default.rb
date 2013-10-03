@@ -42,7 +42,7 @@ end
 
 %w{
   httpd nginx git gcc make
-  zlib-devel gd-devel libxml2-devel expat expat-deve mcrypt
+  zlib-devel gd-devel libxml2-devel expat expat-devel mcrypt
   memcached memcached-devel ImageMagick ImageMagick-perl zip unzip
 }.each do |pkg|
   package pkg do
