@@ -1,7 +1,7 @@
 include_recipe "yum::epel"
 
 yum_key node['yum']['remi']['key'] do
-  url  node['yum']['remi']['key_url']
+  url node['yum']['remi']['key_url']
   action :add
 end
 

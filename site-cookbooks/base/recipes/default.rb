@@ -32,30 +32,12 @@ user node['user'] do
 end
 
 %w{
-  mysql mysql-devel mysql-server mysql-client
-}.each do |pkg|
-  yum_package pkg do
-    options "--enablerepo=remi"
-    action [ :install, :upgrade ]
-  end
-end
-
-%w{
-  httpd nginx git gcc make
+  httpd nginx git gcc make db4-devel
   zlib-devel gd-devel libxml2-devel expat expat-devel mcrypt
-  memcached memcached-devel ImageMagick ImageMagick-perl zip unzip
+  memcached memcached-devel zip unzip
 }.each do |pkg|
   package pkg do
     action :install
-  end
-end
-
-%w{
-  php php-mbstring php-mysql php-mcrypt php-pecl-xdebug
-}.each do |pkg|
-  yum_package pkg do
-    options "--enablerepo=remi"
-    action [ :install, :upgrade ]
   end
 end
 
@@ -75,11 +57,6 @@ end
 
 service "httpd" do
   supports :status => true, :restart => true, :reload => true
-  action [ :enable, :start ]
-end
-
-service "mysqld" do
-  supports :status => true, :restart => true
   action [ :enable, :start ]
 end
 

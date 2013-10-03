@@ -44,7 +44,6 @@ end
 
 node['mysql']['client']['packages'].each do |mysql_pack|
   package mysql_pack do
-    options "--enablerepo=remi"
     action :install
   end
 end
